@@ -36,6 +36,11 @@ class AuthController extends Controller
         $user = Auth::user();
         $jwt = $user->createToken('token')->plainTextToken;
 
+        /**
+         * We don’t want the token to be stored in the front end as above because of security
+         *To fix that, we have to send a token differently via cookies. 
+         */
+        
         $cookie = cookie('jwt', $jwt, 60 * 24);
         return \response([
             'jwt' => $jwt,
@@ -45,5 +50,13 @@ class AuthController extends Controller
     public function user(Request $request)
     {
         return $request->user();
+    }
+
+    public function logout()
+    {
+        $cookie = \Cookie::forget('jwt');
+        return \response([
+            'message' => 'success'
+        ])->withCookie($cookie);
     }
 }
