@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -33,5 +35,8 @@ Route::middleware('auth:sanctum')->group(function(){
     // Route::delete('users/{id}',[UserController::class, 'destroy']);
 
     Route::apiResource('users',UserController::class);
+    Route::get('permission',[PermissionController::class]);
+    Route::get('roles',[RoleController::class]);
+
 });
 
