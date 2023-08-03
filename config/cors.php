@@ -28,7 +28,9 @@ return [
     'exposed_headers' => [],
 
     'max_age' => 0,
-
-    'supports_credentials' => false,
+    /*
+        we want to pass the credentials like cookes. so  ( false -> true ) change 
+    */
+    'supports_credentials' => true,
 
 ];
