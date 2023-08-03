@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
 use Hash;
 use Illuminate\Http\Request;
@@ -33,7 +34,7 @@ class UserController extends Controller
     }
 
    
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
         $user = User::find($id);
         $user->update($request->only('first-name','last-name','email'));
