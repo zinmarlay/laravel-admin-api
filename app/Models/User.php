@@ -10,5 +10,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     protected $guarded = [];
+
+    //we can hidden passwor in api
+    protected $hidden = ['password'];
    
 }
