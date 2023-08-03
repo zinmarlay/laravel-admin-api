@@ -20,7 +20,7 @@ class RoleController extends Controller
 
     public function show($id)
     {
-        return Role::find($id);
+        return Role::with('users')->find($id);
     }
 
     public function update(Request $request, $id)

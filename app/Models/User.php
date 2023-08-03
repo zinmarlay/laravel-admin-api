@@ -40,5 +40,10 @@ class User extends Authenticatable
 
     //we can hidden passwor in api
     protected $hidden = ['password'];
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
    
 }
