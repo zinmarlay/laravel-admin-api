@@ -39,7 +39,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->update($request->only('first_name','last_name','email'));
-        return response($user,Response::HTTP_ACCEPTED);
+        return response(new UserResource($user),Response::HTTP_ACCEPTED);
 
     }
 
