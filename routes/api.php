@@ -35,8 +35,11 @@ Route::middleware('auth:sanctum')->group(function(){
     // Route::delete('users/{id}',[UserController::class, 'destroy']);
 
     Route::apiResource('users',UserController::class);
-    Route::get('permission',[PermissionController::class]);
-    Route::get('roles',[RoleController::class]);
+    Route::apiResource('permission',PermissionController::class);
+    Route::apiResource('roles',RoleController::class);
+    
+    
 
 });
+
 
