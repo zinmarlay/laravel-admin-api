@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\UpdateInfoRequest;
 use App\Http\Requests\UpdatePasswordRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,13 +17,15 @@ class AuthController extends Controller
     public function register(RegisterRequest $request)
     {
         $user = User::create([
-            'first-name' => $request->input('first-name'),
-            'last-name' => $request->input('last-name'),
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
+            'rol_id'=>1,
+
         ]);
 
-        return response($user,Response::HTTP_CREATED);
+        return response(new UserResource($user),Response::HTTP_CREATED);
     }
     public function login (Request $request)
     {
@@ -51,7 +54,7 @@ class AuthController extends Controller
 
     public function user(Request $request)
     {
-        return $request->user();
+        return new UserResource($request->user());
     }
 
     public function logout()
@@ -64,8 +67,8 @@ class AuthController extends Controller
     public function updateInfo(UpdateInfoRequest $request)
     {
         $user = $request->user();
-        $user->update($request->only('first-name','last-name','email'));
-        return response($user,Response::HTTP_ACCEPTED);
+        $user->update($request->only('first_name','last_name','email'));
+        return response(new UserResource($user),Response::HTTP_ACCEPTED);
     }
     public function updatePassword(UpdatePasswordRequest $request)
     {
@@ -73,6 +76,6 @@ class AuthController extends Controller
         $user->update([
             'password' => Hash::make($request->input('password'))   
         ]);
-        return response($user,Response::HTTP_ACCEPTED);
+        return response(new UserResource($user),Response::HTTP_ACCEPTED);
     }
 }

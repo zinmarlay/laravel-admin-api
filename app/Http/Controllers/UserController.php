@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserUpdateRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Hash;
 use Illuminate\Http\Request;
@@ -14,30 +15,30 @@ class UserController extends Controller
  
     public function index()
     {
-        return User::with('role')->paginate();
+        return UserResource::collection(User::paginate());
     }
 
   
     public function store(Request $request)
     {
         $user = User::create(
-            $request->only('first-name','last-name','email')
+            $request->only('first_name','last_name','email','role_id')
             + ['password' => Hash::make(1234)]
         );
-        return response($user,Response::HTTP_CREATED);
+        return response(new UserResource($user),Response::HTTP_CREATED);
     }
 
     
     public function show($id)
     {
-        return User::with('role')->find($id);
+        return new UserResource(User::find($id));   
     }
 
    
     public function update(UserUpdateRequest $request, $id)
     {
         $user = User::find($id);
-        $user->update($request->only('first-name','last-name','email'));
+        $user->update($request->only('first_name','last_name','email'));
         return response($user,Response::HTTP_ACCEPTED);
 
     }
