@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
@@ -35,10 +36,10 @@ Route::middleware('auth:sanctum')->group(function(){
     // Route::delete('users/{id}',[UserController::class, 'destroy']);
 
     Route::apiResource('users',UserController::class);
-    Route::apiResource('permission',PermissionController::class);
     Route::apiResource('roles',RoleController::class);
-    
-    
+    Route::apiResource('products',ProductController::class);
+    Route::get('permissions',[PermissionController::class, 'index']);
+
 
 });
 
