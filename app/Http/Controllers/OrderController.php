@@ -10,7 +10,7 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::with('orderItems')->pagiante();
+        $orders = Order::with('orderItems')->paginate();
         return OrderResource::collection($orders);
     }
 

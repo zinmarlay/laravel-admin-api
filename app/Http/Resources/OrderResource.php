@@ -19,7 +19,7 @@ class OrderResource extends JsonResource
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'email' => $this->email,
-            'order_itmes' => OrderItemResource::collection($this->whenLoaded('orderItems')),
+            'order_items' => OrderItemResource::collection($this->whenLoaded('orderItems')),
         ];
     }
 }

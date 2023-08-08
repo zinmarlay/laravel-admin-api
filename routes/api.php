@@ -42,7 +42,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('products',ProductController::class);
     Route::get('permissions',[PermissionController::class, 'index']);
     Route::post('upload',[ImageController::class, 'upload']);
-    Route::apiResource('order',OrderController::class)->only('index','show');
+    Route::apiResource('orders',OrderController::class)->only('index','show');
 });
 
 
